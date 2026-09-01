@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Kit | Footy Kit Lab</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080808;
+    color: white;
+    min-height: 100vh;
+}
+
+/* NAV */
+
+nav {
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+    border-bottom: 1px solid #222;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #e50914;
+}
+
+.back {
+    color: #777;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* GENERATING */
+
+#loadingScreen {
+    min-height: calc(100vh - 75px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.loading-content {
+    max-width: 600px;
+}
+
+.spinner {
+    width: 65px;
+    height: 65px;
+    border: 4px solid #222;
+    border-top-color: #e50914;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-content h1 {
+    font-size: clamp(35px, 7vw, 65px);
+    letter-spacing: -3px;
+    margin-bottom: 15px;
+}
+
+.loading-content p {
+    color: #777;
+    font-size: 16px;
+}
+
+.loading-status {
+    margin-top: 25px;
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* RESULT */
+
+#resultScreen {
+    display: none;
+    max-width: 1000px;
+    margin: auto;
+    padding: 55px 25px 80px;
+}
+
+.result-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.result-tag {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    background: #181818;
+    border: 1px solid #333;
+    color: #aaa;
+    font-size: 11px;
+    margin-bottom: 18px;
+}
+
+.result-header h1 {
+    font-size: clamp(40px, 7vw, 70px);
+    letter-spacing: -4px;
+    line-height: .95;
+}
+
+.result-header p {
+    color: #777;
+    margin-top: 12px;
+}
+
+/* KIT */
+
+.kit-card {
+    background: #111;
+    border: 1px solid #292929;
+    border-radius: 22px;
+    padding: 25px;
+    text-align: center;
+}
+
+#kitArtwork {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    display: block;
+}
+
+/* BUTTONS */
+
+.actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.action {
+    border: 1px solid #333;
+    background: #171717;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 11px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.action:hover {
+    border-color: #777;
+}
+
+.primary {
+    background: #e50914;
+    border-color: #e50914;
+}
+
+.primary:hover {
+    background: #ff1723;
+}
+
+.info {
+    text-align: center;
+    margin-top: 22px;
+    color: #555;
+    font-size: 12px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="index.html" class="logo">
+FOOTY<span>KIT</span>LAB
+</a>
+
+<a href="customise.html" class="back">
+← Edit design
+</a>
+
+</nav>
+
+
+<!-- LOADING -->
+
+<section id="loadingScreen">
+
+<div class="loading-content">
+
+<div class="spinner"></div>
+
+<h1>
+DESIGNING<br>YOUR KIT.
+</h1>
+
+<p id="loadingText">
+Turning your ideas into a kit...
+</p>
+
+<div class="loading-status" id="loadingStatus">
+Preparing the design...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULT -->
+
+<section id="resultScreen">
+
+<div class="result-header">
+
+<div class="result-tag">
+YOUR KIT IS READY
+</div>
+
+<h1 id="resultTitle">
+YOUR NEW KIT.
+</h1>
+
+<p id="resultSubtitle">
+Designed by Footy Kit Lab.
+</p>
+
+</div>
+
+
+<div class="kit-card">
+
+<div id="kitArtwork"></div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="action primary"
+id="downloadBtn"
+>
+↓ Save Kit
+</button>
+
+<button
+class="action"
+onclick="shareKit()"
+>
+↗ Share
+</button>
+
+<a
+href="customise.html"
+class="action"
+>
+＋ Design Another
+</a>
+
+</div>
+
+
+<p class="info">
+Your kit was generated from your Footy Kit Lab design choices.
+</p>
+
+</section>
+
+
+<script>
+
+/* =====================================
+   LOAD DESIGN
+===================================== */
+
+const savedDesign =
+localStorage.getItem("kitDesign");
+
+let design;
+
+if (savedDesign) {
+
+    design =
+        JSON.parse(savedDesign);
+
+} else {
+
+    design = {
+
+        club: "Your Club",
+
+        kitType: "Home",
+
+        primaryColour: "#ffffff",
+
+        secondaryColour: "#000000",
+
+        accentColour: "#e50914",
+
+        pattern: "Plain",
+
+        collar: "Crew Neck",
+
+        sleeves: "Matching",
+
+        sponsor: "",
+
+        playerName: "",
+
+        playerNumber: ""
+
+    };
+
+}
+
+
+/* =====================================
+   LOADING ANIMATION
+===================================== */
+
+const loadingMessages = [
+
+    "Analysing your design choices...",
+
+    "Choosing the perfect layout...",
+
+    "Building the shirt pattern...",
+
+    "Adding the finishing details...",
+
+    "Finalising your kit..."
+
+];
+
+let messageIndex = 0;
+
+const loadingText =
+document.getElementById(
+    "loadingText"
+);
+
+const loadingStatus =
+document.getElementById(
+    "loadingStatus"
+);
+
+
+const messageTimer =
+setInterval(() => {
+
+    messageIndex++;
+
+    if (
+        messageIndex <
+        loadingMessages.length
+    ) {
+
+        loadingStatus.textContent =
+            loadingMessages[
+                messageIndex
+            ];
+
+    }
+
+}, 900);
+
+
+/* =====================================
+   WAIT THEN GENERATE
+===================================== */
+
+setTimeout(() => {
+
+    clearInterval(messageTimer);
+
+    generateKit();
+
+    document.getElementById(
+        "loadingScreen"
+    ).style.display = "none";
+
+    document.getElementById(
+        "resultScreen"
+    ).style.display = "block";
+
+}, 5000);
+
+
+/* =====================================
+   GENERATE KIT
+===================================== */
+
+function generateKit() {
+
+    const primary =
+        design.primaryColour ||
+        "#ffffff";
+
+    const secondary =
+        design.secondaryColour ||
+        "#000000";
+
+    const accent =
+        design.accentColour ||
+        "#e50914";
+
+    const pattern =
+        design.pattern ||
+        "Plain";
+
+    const collar =
+        design.collar ||
+        "Crew Neck";
+
+    const sleeves =
+        design.sleeves ||
+        "Matching";
+
+    const sponsor =
+        design.sponsor ||
+        "";
+
+    const playerName =
+        design.playerName ||
+        "";
+
+    const playerNumber =
+        design.playerNumber ||
+        "";
+
+
+    document.getElementById(
+        "resultTitle"
+    ).textContent =
+        `${design.club} ${design.kitType} Kit`;
+
+    document.getElementById(
+        "resultSubtitle"
+    ).textContent =
+        `${design.era || "Modern"} • ${design.style || "Clean"} • Footy Kit Lab`;
+
+
+    const svg =
+        createShirtSVG(
+            primary,
+            secondary,
+            accent,
+            pattern,
+            collar,
+            sleeves,
+            sponsor,
+            playerName,
+            playerNumber
+        );
+
+
+    document.getElementById(
+        "kitArtwork"
+    ).innerHTML = svg;
+
+}
+
+
+/* =====================================
+   CREATE SVG SHIRT
+===================================== */
+
+function createShirtSVG(
+    primary,
+    secondary,
+    accent,
+    pattern,
+    collar,
+    sleeves,
+    sponsor,
+    playerName,
+    playerNumber
+) {
+
+    let patternSVG = "";
+
+
+    /* STRIPES */
+
+    if (pattern === "Stripes") {
+
+        for (
+            let x = 120;
+            x < 680;
+            x += 80
+        ) {
+
+            patternSVG += `
+                <rect
+                    x="${x}"
+                    y="170"
+                    width="40"
+                    height="560"
+                    fill="${secondary}"
+                    opacity="0.9"
+                />
+            `;
+
+        }
+
+    }
+
+
+    /* HOOPS */
+
+    else if (pattern === "Hoops") {
+
+        for (
+            let y = 250;
+            y < 700;
+            y += 90
+        ) {
+
+            patternSVG += `
+                <rect
+                    x="100"
+                    y="${y}"
+                    width="600"
+                    height="45"
+                    fill="${secondary}"
+                    opacity="0.9"
+                />
+            `;
+
+        }
+
+    }
+
+
+    /* HALF & HALF */
+
+    else if (
+        pattern === "Half & Half"
+    ) {
+
+        patternSVG = `
+
+            <path
+                d="M400 150
+                   L400 735
+                   L100 735
+                   L100 250
+                   L240 160
+                   Z"
+                fill="${secondary}"
+                opacity="0.9"
+            />
+
+        `;
+
+    }
+
+
+    /* GRADIENT */
+
+    else if (
+        pattern === "Gradient"
+    ) {
+
+        patternSVG = `
+
+            <defs>
+
+                <linearGradient
+                    id="shirtGradient"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                >
+
+                    <stop
+                        offset="0%"
+                        stop-color="${primary}"
+                    />
+
+                    <stop
+                        offset="100%"
+                        stop-color="${secondary}"
+                    />
+
+                </linearGradient>
+
+            </defs>
+
+            <path
+                d="M100 250
+                   L240 160
+                   L560 160
+                   L700 250
+                   L630 735
+                   L170 735
+                   Z"
+                fill="url(#shirtGradient)"
+            />
+
+        `;
+
+    }
+
+
+    /* GEOMETRIC */
+
+    else if (
+        pattern === "Geometric"
+    ) {
+
+        patternSVG = `
+
+            <path
+                d="M100 300 L300 180 L450 300 L250 420 Z"
+                fill="${secondary}"
+                opacity="0.65"
+            />
+
+            <path
+                d="M700 300 L500 180 L350 300 L550 420 Z"
+                fill="${accent}"
+                opacity="0.65"
+            />
+
+        `;
+
+    }
+
+
+    /* PINSTRIPES */
+
+    else if (
+        pattern === "Pinstripes"
+    ) {
+
+        for (
+            let x = 130;
+            x < 690;
+            x += 38
+        ) {
+
+            patternSVG += `
+
+                <rect
+                    x="${x}"
+                    y="170"
+                    width="3"
+                    height="560"
+                    fill="${secondary}"
+                    opacity="0.8"
+                />
+
+            `;
+
+        }
+
+    }
+
+
+    /* CAMO */
+
+    else if (
+        pattern === "Camo"
+    ) {
+
+        patternSVG = `
+
+            <path
+                d="M120 280
+                   Q200 210 280 280
+                   T450 250
+                   T680 300
+                   L630 390
+                   Q500 350 400 430
+                   T180 390 Z"
+                fill="${secondary}"
+                opacity="0.55"
+            />
+
+            <path
+                d="M150 520
+                   Q250 430 340 510
+                   T520 500
+                   T680 560
+                   L630 660
+                   Q520 610 430 670
+                   T180 640 Z"
+                fill="${accent}"
+                opacity="0.35"
+            />
+
+        `;
+
+    }
+
+
+    /* SLEEVES */
+
+    let sleeveColour =
+        sleeves === "Contrast"
+            ? secondary
+            : primary;
+
+
+    if (
+        sleeves === "Striped"
+    ) {
+
+        sleeveColour =
+            primary;
+
+    }
+
+
+    /* COLLAR */
+
+    let collarSVG = "";
+
+
+    if (
+        collar === "V-Neck"
+    ) {
+
+        collarSVG = `
+
+            <path
+                d="M330 165
+                   L400 240
+                   L470 165"
+                fill="none"
+                stroke="${accent}"
+                stroke-width="22"
+            />
+
+        `;
+
+    }
+
+    else if (
+        collar === "Polo"
+    ) {
+
+        collarSVG = `
+
+            <path
+                d="M330 165
+                   L400 230
+                   L470 165"
+                fill="${secondary}"
+            />
+
+            <path
+                d="M330 165
+                   L400 230
+                   L470 165"
+                fill="none"
+                stroke="${accent}"
+                stroke-width="7"
+            />
+
+        `;
+
+    }
+
+    else if (
+        collar === "Retro"
+    ) {
+
+        collarSVG = `
+
+            <ellipse
+                cx="400"
+                cy="180"
+                rx="75"
+                ry="38"
+                fill="none"
+                stroke="${secondary}"
+                stroke-width="18"
+            />
+
+        `;
+
+    }
+
+    else if (
+        collar === "No Collar"
+    ) {
+
+        collarSVG = "";
+
+    }
+
+    else {
+
+        collarSVG = `
+
+            <path
+                d="M340 165
+                   Q400 215 460 165"
+                fill="none"
+                stroke="${accent}"
+                stroke-width="14"
+            />
+
+        `;
+
+    }
+
+
+    /* SVG */
+
+    return `
+
+<svg
+    id="generatedKit"
+    viewBox="0 0 800 850"
+    xmlns="http://www.w3.org/2000/svg"
+>
+
+    <defs>
+
+        <filter
+            id="shadow"
+            x="-30%"
+            y="-30%"
+            width="160%"
+            height="160%"
+        >
+
+            <feDropShadow
+                dx="0"
+                dy="18"
+                stdDeviation="18"
+                flood-opacity="0.45"
+            />
+
+        </filter>
+
+        <clipPath id="shirtClip">
+
+            <path
+                d="
+                    M100 250
+                    L240 160
+                    L330 130
+                    Q400 180 470 130
+                    L560 160
+                    L700 250
+                    L630 735
+                    L170 735
+                    Z
+                "
+            />
+
+        </clipPath>
+
+    </defs>
+
+
+    <!-- BACKGROUND -->
+
+    <rect
+        width="800"
+        height="850"
+        fill="#111111"
+        rx="25"
+    />
+
+
+    <!-- SHIRT -->
+
+    <path
+        d="
+            M100 250
+            L240 160
+            L330 130
+            Q400 180 470 130
+            L560 160
+            L700 250
+            L630 735
+            L170 735
+            Z
+        "
+        fill="${primary}"
+        filter="url(#shadow)"
+    />
+
+
+    <!-- PATTERN -->
+
+    <g clip-path="url(#shirtClip)">
+
+        ${patternSVG}
+
+    </g>
+
+
+    <!-- LEFT SLEEVE -->
+
+    <path
+        d="
+            M240 160
+            L100 250
+            L40 410
+            L170 455
+            L300 260
+            Z
+        "
+        fill="${sleeveColour}"
+    />
+
+
+    <!-- RIGHT SLEEVE -->
+
+    <path
+        d="
+            M560 160
+            L700 250
+            L760 410
+            L630 455
+            L500 260
+            Z
+        "
+        fill="${sleeveColour}"
+    />
+
+
+    <!-- SLEEVE ACCENTS -->
+
+    <path
+        d="
+            M70 365
+            L155 395
+            L140 435
+            L55 405
+            Z
+        "
+        fill="${accent}"
+    />
+
+    <path
+        d="
+            M730 365
+            L645 395
+            L660 435
+            L745 405
+            Z
+        "
+        fill="${accent}"
+    />
+
+
+    <!-- BODY BORDER -->
+
+    <path
+        d="
+            M100 250
+            L240 160
+            L330 130
+            Q400 180 470 130
+            L560 160
+            L700 250
+            L630 735
+            L170 735
+            Z
+        "
+        fill="none"
+        stroke="${accent}"
+        stroke-width="8"
+    />
+
+
+    <!-- COLLAR -->
+
+    ${collarSVG}
+
+
+    <!-- CLUB MARK -->
+
+    <circle
+        cx="280"
+        cy="280"
+        r="30"
+        fill="${accent}"
+    />
+
+    <text
+        x="280"
+        y="288"
+        text-anchor="middle"
+        font-size="20"
+        font-weight="900"
+        fill="white"
+    >
+        FC
+    </text>
+
+
+    <!-- MANUFACTURER -->
+
+    <text
+        x="520"
+        y="288"
+        text-anchor="middle"
+        font-size="25"
+        font-weight="900"
+        fill="${accent}"
+    >
+        ★
+    </text>
+
+
+    <!-- SPONSOR -->
+
+    ${
+        sponsor
+        ? `
+        <text
+            x="400"
+            y="410"
+            text-anchor="middle"
+            font-size="42"
+            font-weight="900"
+            fill="${accent}"
+        >
+            ${escapeXML(sponsor)}
+        </text>
+        `
+        : ""
+    }
+
+
+    <!-- PLAYER -->
+
+    ${
+        playerName
+        ? `
+        <text
+            x="400"
+            y="505"
+            text-anchor="middle"
+            font-size="25"
+            font-weight="700"
+            fill="${accent}"
+        >
+            ${escapeXML(playerName)}
+        </text>
+        `
+        : ""
+    }
+
+
+    ${
+        playerNumber
+        ? `
+        <text
+            x="400"
+            y="575"
+            text-anchor="middle"
+            font-size="70"
+            font-weight="900"
+            fill="${accent}"
+        >
+            ${escapeXML(playerNumber)}
+        </text>
+        `
+        : ""
+    }
+
+
+    <!-- BRAND -->
+
+    <text
+        x="400"
+        y="690"
+        text-anchor="middle"
+        font-size="15"
+        font-weight="700"
+        letter-spacing="4"
+        fill="${secondary}"
+        opacity="0.7"
+    >
+        FOOTY KIT LAB
+    </text>
+
+
+</svg>
+
+`;
+
+}
+
+
+/* =====================================
+   ESCAPE TEXT
+===================================== */
+
+function escapeXML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&apos;");
+
+}
+
+
+/* =====================================
+   DOWNLOAD
+===================================== */
+
+document
+.getElementById("downloadBtn")
+.addEventListener(
+    "click",
+    function() {
+
+        const svg =
+            document.getElementById(
+                "generatedKit"
+            );
+
+        const svgData =
+            new XMLSerializer()
+            .serializeToString(svg);
+
+        const blob =
+            new Blob(
+                [svgData],
+                {
+                    type: "image/svg+xml"
+                }
+            );
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = url;
+
+        link.download =
+            `${design.club}-kit.svg`;
+
+        document.body.appendChild(link);
+
+        link.click();
+
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(url);
+
+    }
+);
+
+
+/* =====================================
+   SHARE
+===================================== */
+
+async function shareKit() {
+
+    const shareData = {
+
+        title:
+            `${design.club} Kit - Footy Kit Lab`,
+
+        text:
+            `Check out my ${design.club} kit designed with Footy Kit Lab!`
+
+    };
+
+
+    if (
+        navigator.share
+    ) {
+
+        try {
+
+            await navigator.share(
+                shareData
+            );
+
+        } catch (error) {
+
+            console.log(
+                "Share cancelled"
+            );
+
+        }
+
+    }
+
+    else {
+
+        alert(
+            "Copy your Footy Kit Lab link and share it with your friends!"
+        );
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
