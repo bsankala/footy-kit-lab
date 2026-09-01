@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta " content="width=device-width, initial-scale=1.0">
-
-<title>Design Your Kit | Footy Kit Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customise Your Kit | Footy Kit Lab</title>
 
 <style>
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
@@ -20,8 +18,6 @@ body {
     color: white;
     min-height: 100vh;
 }
-
-/* NAV */
 
 nav {
     height: 75px;
@@ -37,7 +33,6 @@ nav {
     text-decoration: none;
     font-size: 24px;
     font-weight: 900;
-    letter-spacing: -1px;
 }
 
 .logo span {
@@ -45,27 +40,20 @@ nav {
 }
 
 .back {
-    color: #aaa;
+    color: #888;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 600;
 }
-
-.back:hover {
-    color: white;
-}
-
-/* MAIN */
 
 main {
-    max-width: 1150px;
+    max-width: 1050px;
     margin: auto;
     padding: 55px 25px 80px;
 }
 
 .header {
     text-align: center;
-    margin-bottom: 45px;
+    margin-bottom: 40px;
 }
 
 .step {
@@ -88,10 +76,7 @@ h1 {
 
 .subtitle {
     color: #777;
-    font-size: 16px;
 }
-
-/* SELECTED CLUB */
 
 .selected-club {
     background: #141414;
@@ -101,15 +86,12 @@ h1 {
     display: flex;
     align-items: center;
     gap: 18px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .club-badge {
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 60px;
+    height: 60px;
 }
 
 .club-badge img {
@@ -121,84 +103,80 @@ h1 {
 .club-info small {
     color: #666;
     font-size: 11px;
-    text-transform: uppercase;
 }
 
 .club-info h2 {
     margin-top: 4px;
-    font-size: 23px;
+    font-size: 22px;
 }
-
-/* DESIGN GRID */
 
 .design-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    gap: 16px;
 }
 
 .card {
     background: #141414;
     border: 1px solid #292929;
     border-radius: 18px;
-    padding: 25px;
+    padding: 24px;
 }
 
-.card.full {
+.full {
     grid-column: 1 / -1;
 }
 
 .card h3 {
     font-size: 17px;
-    margin-bottom: 18px;
+    margin-bottom: 17px;
 }
-
-label {
-    display: block;
-    color: #888;
-    font-size: 12px;
-    margin-bottom: 8px;
-}
-
-/* BUTTON OPTIONS */
 
 .options {
     display: flex;
     flex-wrap: wrap;
-    gap: 9px;
+    gap: 8px;
 }
 
-.option {
+.option,
+.inspiration {
     background: #1d1d1d;
     border: 1px solid #333;
     color: #aaa;
-    padding: 11px 15px;
+    padding: 10px 14px;
     border-radius: 10px;
     cursor: pointer;
     font-size: 13px;
     transition: .15s;
 }
 
-.option:hover {
-    border-color: #777;
+.option:hover,
+.inspiration:hover {
     color: white;
+    border-color: #777;
 }
 
-.option.active {
+.option.active,
+.inspiration.active {
     background: white;
     color: black;
     border-color: white;
 }
 
-/* COLOURS */
-
 .colour-row {
     display: flex;
-    gap: 25px;
+    gap: 15px;
 }
 
 .colour-box {
     flex: 1;
+}
+
+label {
+    display: block;
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 8px;
 }
 
 input[type="color"] {
@@ -207,11 +185,9 @@ input[type="color"] {
     border: 1px solid #333;
     border-radius: 10px;
     background: #1b1b1b;
-    cursor: pointer;
     padding: 4px;
+    cursor: pointer;
 }
-
-/* TEXT INPUTS */
 
 input[type="text"],
 textarea,
@@ -238,21 +214,47 @@ textarea {
     resize: vertical;
 }
 
-/* GENERATE */
+.inspiration-description {
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+
+.inspiration-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.inspiration {
+    padding: 16px 8px;
+    text-align: center;
+}
+
+.inspiration-icon {
+    display: block;
+    font-size: 24px;
+    margin-bottom: 7px;
+}
+
+.inspiration-name {
+    font-size: 12px;
+}
 
 .generate-area {
-    margin-top: 25px;
     text-align: center;
+    margin-top: 25px;
 }
 
 .generate-btn {
     width: 100%;
     max-width: 600px;
+    padding: 20px;
     border: none;
+    border-radius: 14px;
     background: #e50914;
     color: white;
-    padding: 20px;
-    border-radius: 14px;
     font-size: 18px;
     font-weight: 900;
     cursor: pointer;
@@ -260,12 +262,8 @@ textarea {
 }
 
 .generate-btn:hover {
-    transform: translateY(-2px);
     background: #ff1723;
-}
-
-.generate-btn:active {
-    transform: scale(.98);
+    transform: translateY(-2px);
 }
 
 .note {
@@ -274,24 +272,7 @@ textarea {
     margin-top: 12px;
 }
 
-/* MESSAGE */
-
-.message {
-    display: none;
-    margin: 25px auto 0;
-    max-width: 600px;
-    padding: 18px;
-    background: #151515;
-    border: 1px solid #292929;
-    border-radius: 12px;
-    text-align: center;
-    color: #aaa;
-}
-
-/* MOBILE */
-
 @media (max-width: 700px) {
-
     nav {
         padding: 0 20px;
     }
@@ -304,29 +285,28 @@ textarea {
         grid-template-columns: 1fr;
     }
 
-    .card.full {
+    .full {
         grid-column: auto;
     }
 
     .colour-row {
         flex-direction: column;
-        gap: 18px;
+    }
+
+    .inspiration-options {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     h1 {
         letter-spacing: -2px;
     }
-
 }
-
 </style>
 </head>
-
 
 <body>
 
 <nav>
-
     <a href="index.html" class="logo">
         FOOTY<span>KIT</span>LAB
     </a>
@@ -334,370 +314,321 @@ textarea {
     <a href="design.html" class="back">
         ← Change club
     </a>
-
 </nav>
-
 
 <main>
 
+<div class="header">
+    <div class="step">STEP 02</div>
 
-    <div class="header">
+    <h1>DESIGN YOUR<br>KIT.</h1>
 
-        <div class="step">
-            STEP 02
-        </div>
+    <p class="subtitle">
+        Tell us what you're imagining.
+    </p>
+</div>
 
-        <h1>
-            DESIGN YOUR<br>KIT.
-        </h1>
+<div class="selected-club">
 
-        <p class="subtitle">
-            Make it yours. Every detail is up to you.
-        </p>
-
+    <div class="club-badge">
+        <img id="clubBadge" src="" alt="Club badge">
     </div>
 
-
-    <!-- SELECTED CLUB -->
-
-    <div class="selected-club">
-
-        <div class="club-badge">
-
-            <img
-                id="clubBadge"
-                src=""
-                alt="Club badge"
-            >
-
-        </div>
-
-        <div class="club-info">
-
-            <small>
-                DESIGNING FOR
-            </small>
-
-            <h2 id="clubName">
-                Your Club
-            </h2>
-
-        </div>
-
+    <div class="club-info">
+        <small>DESIGNING FOR</small>
+        <h2 id="clubName">Your Club</h2>
     </div>
 
-
-    <div class="design-grid">
-
-
-        <!-- KIT TYPE -->
-
-        <div class="card">
-
-            <h3>👕 Kit type</h3>
-
-            <div class="options">
-
-                <button class="option active">
-                    Home
-                </button>
-
-                <button class="option">
-                    Away
-                </button>
-
-                <button class="option">
-                    Third
-                </button>
-
-                <button class="option">
-                    Goalkeeper
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- PATTERN -->
-
-        <div class="card">
-
-            <h3>🧩 Pattern</h3>
-
-            <div class="options">
-
-                <button class="option active">
-                    Plain
-                </button>
-
-                <button class="option">
-                    Stripes
-                </button>
-
-                <button class="option">
-                    Hoops
-                </button>
-
-                <button class="option">
-                    Half & Half
-                </button>
-
-                <button class="option">
-                    Gradient
-                </button>
-
-                <button class="option">
-                    Geometric
-                </button>
-
-                <button class="option">
-                    Retro
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- COLOURS -->
-
-        <div class="card">
-
-            <h3>🎨 Colours</h3>
-
-            <div class="colour-row">
-
-                <div class="colour-box">
-
-                    <label>
-                        PRIMARY COLOUR
-                    </label>
-
-                    <input
-                        type="color"
-                        id="primaryColour"
-                        value="#ffffff"
-                    >
-
-                </div>
-
-
-                <div class="colour-box">
-
-                    <label>
-                        SECONDARY COLOUR
-                    </label>
-
-                    <input
-                        type="color"
-                        id="secondaryColour"
-                        value="#000000"
-                    >
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- COLLAR -->
-
-        <div class="card">
-
-            <h3>👔 Collar</h3>
-
-            <div class="options">
-
-                <button class="option active">
-                    Crew Neck
-                </button>
-
-                <button class="option">
-                    V-Neck
-                </button>
-
-                <button class="option">
-                    Polo
-                </button>
-
-                <button class="option">
-                    No Collar
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- SLEEVES -->
-
-        <div class="card">
-
-            <h3>💪 Sleeves</h3>
-
-            <div class="options">
-
-                <button class="option active">
-                    Plain
-                </button>
-
-                <button class="option">
-                    Striped
-                </button>
-
-                <button class="option">
-                    Contrast
-                </button>
-
-                <button class="option">
-                    Gradient
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- MANUFACTURER -->
-
-        <div class="card">
-
-            <h3>🏷️ Manufacturer</h3>
-
-            <select id="manufacturer">
-
-                <option>Adidas</option>
-                <option>Nike</option>
-                <option>Puma</option>
-                <option>Umbro</option>
-                <option>New Balance</option>
-                <option>Castore</option>
-                <option>Macron</option>
-                <option>Joma</option>
-                <option>Other</option>
-
-            </select>
-
-        </div>
-
-
-        <!-- SPONSOR -->
-
-        <div class="card">
-
-            <h3>💰 Sponsor</h3>
-
-            <input
-                type="text"
-                id="sponsor"
-                placeholder="e.g. Emirates, Vodafone, your own sponsor..."
-            >
-
-        </div>
-
-
-        <!-- EXTRA DETAILS -->
-
-        <div class="card full">
-
-            <h3>✨ Extra details</h3>
-
-            <textarea
-                id="details"
-                placeholder="Tell the AI exactly what you want...
+</div>
+
+<div class="design-grid">
+
+<!-- KIT TYPE -->
+
+<div class="card">
+<h3>👕 Kit type</h3>
+
+<div class="options">
+<button class="option active">Home</button>
+<button class="option">Away</button>
+<button class="option">Third</button>
+<button class="option">Goalkeeper</button>
+</div>
+</div>
+
+<!-- ERA -->
+
+<div class="card">
+<h3>📅 Era / vibe</h3>
+
+<div class="options">
+<button class="option active">Modern</button>
+<button class="option">Retro</button>
+<button class="option">90s</button>
+<button class="option">2000s</button>
+<button class="option">Futuristic</button>
+</div>
+</div>
+
+<!-- STYLE -->
+
+<div class="card">
+<h3>✨ Overall style</h3>
+
+<div class="options">
+<button class="option active">Clean</button>
+<button class="option">Classic</button>
+<button class="option">Bold</button>
+<button class="option">Experimental</button>
+<button class="option">Minimal</button>
+</div>
+</div>
+
+<!-- PATTERN -->
+
+<div class="card">
+<h3>🧩 Pattern</h3>
+
+<div class="options">
+<button class="option active">Plain</button>
+<button class="option">Stripes</button>
+<button class="option">Hoops</button>
+<button class="option">Half & Half</button>
+<button class="option">Gradient</button>
+<button class="option">Geometric</button>
+<button class="option">Pinstripes</button>
+<button class="option">Camo</button>
+</div>
+</div>
+
+<!-- COLOURS -->
+
+<div class="card">
+<h3>🎨 Colours</h3>
+
+<div class="colour-row">
+
+<div class="colour-box">
+<label>PRIMARY COLOUR</label>
+<input type="color" id="primaryColour" value="#ffffff">
+</div>
+
+<div class="colour-box">
+<label>SECONDARY COLOUR</label>
+<input type="color" id="secondaryColour" value="#000000">
+</div>
+
+<div class="colour-box">
+<label>ACCENT COLOUR</label>
+<input type="color" id="accentColour" value="#e50914">
+</div>
+
+</div>
+</div>
+
+<!-- COLLAR -->
+
+<div class="card">
+<h3>👔 Collar</h3>
+
+<div class="options">
+<button class="option active">Crew Neck</button>
+<button class="option">V-Neck</button>
+<button class="option">Polo</button>
+<button class="option">Retro</button>
+<button class="option">No Collar</button>
+</div>
+</div>
+
+<!-- SLEEVES -->
+
+<div class="card">
+<h3>💪 Sleeves & cuffs</h3>
+
+<div class="options">
+<button class="option active">Matching</button>
+<button class="option">Contrast</button>
+<button class="option">Striped</button>
+<button class="option">Patterned</button>
+</div>
+</div>
+
+<!-- MANUFACTURER -->
+
+<div class="card">
+<h3>🏷️ Manufacturer</h3>
+
+<select id="manufacturer">
+<option>Adidas</option>
+<option>Nike</option>
+<option>Puma</option>
+<option>Umbro</option>
+<option>New Balance</option>
+<option>Castore</option>
+<option>Macron</option>
+<option>Joma</option>
+<option>Other</option>
+</select>
+</div>
+
+<!-- SPONSOR -->
+
+<div class="card">
+<h3>💰 Main sponsor</h3>
+
+<input
+type="text"
+id="sponsor"
+placeholder="e.g. Emirates, Vodafone..."
+>
+</div>
+
+<!-- PLAYER -->
+
+<div class="card">
+<h3>🔢 Player details</h3>
+
+<input
+type="text"
+id="playerName"
+placeholder="Player name (optional)"
+>
+
+<br><br>
+
+<input
+type="text"
+id="playerNumber"
+placeholder="Player number (optional)"
+>
+</div>
+
+<!-- INSPIRATION -->
+
+<div class="card full">
+
+<h3>🎯 Design inspiration</h3>
+
+<p class="inspiration-description">
+Pick anything you'd like the generator to take inspiration from.
+You can choose as many as you want.
+</p>
+
+<div class="inspiration-options">
+
+<button class="inspiration">
+<span class="inspiration-icon">🏟️</span>
+<span class="inspiration-name">Stadium</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">🏙️</span>
+<span class="inspiration-name">City</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">📜</span>
+<span class="inspiration-name">Club History</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">🎨</span>
+<span class="inspiration-name">Local Culture</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">⭐</span>
+<span class="inspiration-name">Famous Player</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">🏆</span>
+<span class="inspiration-name">Trophies</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">🌊</span>
+<span class="inspiration-name">Landscape</span>
+</button>
+
+<button class="inspiration">
+<span class="inspiration-icon">🎲</span>
+<span class="inspiration-name">Surprise Me</span>
+</button>
+
+</div>
+</div>
+
+<!-- EXTRA DETAILS -->
+
+<div class="card full">
+
+<h3>✨ Anything else?</h3>
+
+<textarea
+id="details"
+placeholder="Tell us anything else you'd like...
 
 Example:
-Gold trim around the collar and sleeves, subtle Fulham-inspired Thames pattern, black Adidas stripes and a retro 1990s feel."
-            ></textarea>
+Inspired by a classic Fulham kit with subtle Thames details and a premium feel."
+></textarea>
 
-        </div>
+</div>
 
+</div>
 
-    </div>
+<div class="generate-area">
 
+<button
+class="generate-btn"
+id="generateBtn"
+>
+⚡ GENERATE MY KIT
+</button>
 
-    <!-- GENERATE -->
+<p class="note">
+Your choices will be used to create your kit.
+</p>
 
-    <div class="generate-area">
-
-        <button
-            class="generate-btn"
-            id="generateBtn"
-        >
-            ⚡ GENERATE KIT
-        </button>
-
-        <p class="note">
-            AI kit generation will be connected here.
-        </p>
-
-        <div
-            class="message"
-            id="message"
-        >
-            🤖 Your kit design is being prepared...
-        </div>
-
-    </div>
-
+</div>
 
 </main>
 
-
 <script>
 
-/* =====================================
-   LOAD SELECTED CLUB
-===================================== */
+/* LOAD CLUB */
 
 const clubName =
-    localStorage.getItem("selectedClub");
+localStorage.getItem("selectedClub");
 
 const clubBadge =
-    localStorage.getItem("selectedClubBadge");
-
+localStorage.getItem("selectedClubBadge");
 
 if (clubName) {
-
-    document.getElementById("clubName").textContent =
-        clubName;
-
+    document.getElementById("clubName").textContent = clubName;
 }
-
 
 if (clubBadge) {
-
-    document.getElementById("clubBadge").src =
-        clubBadge;
-
+    document.getElementById("clubBadge").src = clubBadge;
 }
 
 
-/* =====================================
-   OPTION BUTTONS
-===================================== */
+/* NORMAL OPTIONS */
 
-const optionGroups =
-    document.querySelectorAll(".options");
-
-
-optionGroups.forEach(group => {
+document.querySelectorAll(".options").forEach(group => {
 
     const buttons =
         group.querySelectorAll(".option");
 
-
     buttons.forEach(button => {
 
-        button.addEventListener("click", () => {
+        button.addEventListener("click", function() {
 
             buttons.forEach(btn =>
                 btn.classList.remove("active")
             );
 
-            button.classList.add("active");
+            this.classList.add("active");
 
         });
 
@@ -706,97 +637,127 @@ optionGroups.forEach(group => {
 });
 
 
-/* =====================================
-   GENERATE BUTTON
-===================================== */
+/* INSPIRATION */
+
+document.querySelectorAll(".inspiration").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+        this.classList.toggle("active");
+
+    });
+
+});
+
+
+/* GENERATE */
 
 document
 .getElementById("generateBtn")
-.addEventListener("click", () => {
+.addEventListener("click", function() {
+
+    const groups =
+        Array.from(
+            document.querySelectorAll(".options")
+        );
+
+    const selected = groups.map(group => {
+
+        const active =
+            group.querySelector(".option.active");
+
+        return active
+            ? active.textContent.trim()
+            : "";
+
+    });
 
 
-    const kitType =
-        document.querySelector(
-            ".card:nth-child(1) .option.active"
-        )?.textContent;
+    const inspirations =
+        Array.from(
+            document.querySelectorAll(
+                ".inspiration.active"
+            )
+        ).map(button =>
+            button
+                .querySelector(".inspiration-name")
+                .textContent.trim()
+        );
 
-
-    const pattern =
-        document.querySelector(
-            ".card:nth-child(2) .option.active"
-        )?.textContent;
-
-
-    const collar =
-        document.querySelector(
-            ".card:nth-child(4) .option.active"
-        )?.textContent;
-
-
-    const sleeves =
-        document.querySelector(
-            ".card:nth-child(5) .option.active"
-        )?.textContent;
-
-
-    const primary =
-        document.getElementById(
-            "primaryColour"
-        ).value;
-
-
-    const secondary =
-        document.getElementById(
-            "secondaryColour"
-        ).value;
-
-
-    const manufacturer =
-        document.getElementById(
-            "manufacturer"
-        ).value;
-
-
-    const sponsor =
-        document.getElementById(
-            "sponsor"
-        ).value;
-
-
-    const details =
-        document.getElementById(
-            "details"
-        ).value;
-
-
-    /* Save design */
 
     const design = {
 
-        club: clubName || "Unknown Club",
+        club:
+            clubName || "Your Club",
 
-        badge: clubBadge || "",
+        badge:
+            clubBadge || "",
 
-        kitType: kitType,
+        kitType:
+            selected[0],
 
-        pattern: pattern,
+        era:
+            selected[1],
 
-        primaryColour: primary,
+        style:
+            selected[2],
 
-        secondaryColour: secondary,
+        pattern:
+            selected[3],
 
-        collar: collar,
+        primaryColour:
+            document.getElementById(
+                "primaryColour"
+            ).value,
 
-        sleeves: sleeves,
+        secondaryColour:
+            document.getElementById(
+                "secondaryColour"
+            ).value,
 
-        manufacturer: manufacturer,
+        accentColour:
+            document.getElementById(
+                "accentColour"
+            ).value,
 
-        sponsor: sponsor,
+        collar:
+            selected[4],
 
-        details: details
+        sleeves:
+            selected[5],
+
+        manufacturer:
+            document.getElementById(
+                "manufacturer"
+            ).value,
+
+        sponsor:
+            document.getElementById(
+                "sponsor"
+            ).value,
+
+        playerName:
+            document.getElementById(
+                "playerName"
+            ).value,
+
+        playerNumber:
+            document.getElementById(
+                "playerNumber"
+            ).value,
+
+        inspiration:
+            inspirations,
+
+        details:
+            document.getElementById(
+                "details"
+            ).value
 
     };
 
+
+    /* SAVE */
 
     localStorage.setItem(
         "kitDesign",
@@ -804,28 +765,10 @@ document
     );
 
 
-    /* Show message */
+    /* GO TO GENERATOR */
 
-    const message =
-        document.getElementById("message");
-
-
-    message.style.display =
-        "block";
-
-
-    message.innerHTML = `
-        🤖 <strong>Kit saved!</strong><br><br>
-        ${clubName || "Your club"} ${kitType} kit<br>
-        is ready for AI generation.
-    `;
-
-
-    document.getElementById(
-        "generateBtn"
-    ).textContent =
-        "✓ KIT DESIGN SAVED";
-
+    window.location.href =
+        "generate.html";
 
 });
 
