@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footy Kit Lab</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: white;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #222;
+            background: #080808;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 70px 8%;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 80% 50%, #2b0b0d 0%, #080808 45%);
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #181818;
+            border: 1px solid #333;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(55px, 8vw, 105px);
+            line-height: 0.88;
+            letter-spacing: -6px;
+            margin-bottom: 30px;
+            font-weight: 900;
+        }
+
+        h1 span {
+            color: #e50914;
+        }
+
+        .hero-text p {
+            color: #aaa;
+            font-size: 19px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin-bottom: 35px;
+        }
+
+        .start-button {
+            display: inline-block;
+            background: #e50914;
+            color: white;
+            text-decoration: none;
+            padding: 17px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 800;
+            transition: 0.2s;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            background: #ff1b26;
+        }
+
+        .no-account {
+            display: block;
+            margin-top: 15px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* KIT */
+
+        .kit-area {
+            width: 430px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .kit {
+            width: 270px;
+            height: 340px;
+            background: white;
+            position: relative;
+            border-radius: 25px 25px 18px 18px;
+            transform: perspective(700px) rotateY(-12deg);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7);
+            transition: 0.4s;
+        }
+
+        .kit:hover {
+            transform: perspective(700px) rotateY(5deg) translateY(-10px);
+        }
+
+        .kit::before {
+            content: "";
+            position: absolute;
+            left: -75px;
+            top: 10px;
+            width: 95px;
+            height: 150px;
+            background: white;
+            transform: rotate(25deg);
+            border-radius: 25px;
+        }
+
+        .kit::after {
+            content: "";
+            position: absolute;
+            right: -75px;
+            top: 10px;
+            width: 95px;
+            height: 150px;
+            background: white;
+            transform: rotate(-25deg);
+            border-radius: 25px;
+        }
+
+        .kit-stripe {
+            position: absolute;
+            width: 100%;
+            height: 45px;
+            background: #111;
+            top: 125px;
+        }
+
+        .kit-collar {
+            position: absolute;
+            width: 75px;
+            height: 35px;
+            border: 7px solid #111;
+            border-top: none;
+            border-radius: 0 0 40px 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .kit-logo {
+            position: absolute;
+            top: 80px;
+            left: 35px;
+            font-weight: 900;
+            color: #111;
+            font-size: 12px;
+        }
+
+        .kit-sponsor {
+            position: absolute;
+            top: 178px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+            font-weight: 900;
+            color: #111;
+            white-space: nowrap;
+        }
+
+        .kit-number {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 65px;
+            font-weight: 900;
+            color: #111;
+        }
+
+        /* HOW IT WORKS */
+
+        .section {
+            padding: 90px 8%;
+            background: #0d0d0d;
+        }
+
+        .section-title {
+            font-size: 45px;
+            font-weight: 900;
+            margin-bottom: 50px;
+            letter-spacing: -2px;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            background: #151515;
+            border: 1px solid #252525;
+            border-radius: 18px;
+            padding: 35px;
+            transition: 0.25s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            border-color: #444;
+        }
+
+        .step-number {
+            color: #e50914;
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        .step h3 {
+            font-size: 23px;
+            margin: 25px 0 12px;
+        }
+
+        .step p {
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            padding: 35px 8%;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            nav {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 60px 6%;
+            }
+
+            .hero-text p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .kit-area {
+                width: 100%;
+                margin-top: 50px;
+                transform: scale(0.8);
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <div class="logo">
+            FOOTY<span>KIT</span>LAB
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Design a Kit</a>
+            <a href="#">Gallery</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <div class="tag">
+                ⚡ AI-POWERED KIT DESIGNER
+            </div>
+
+            <h1>
+                DESIGN<br>
+                THE <span>KIT.</span>
+            </h1>
+
+            <p>
+                Create your dream football kit.
+                Choose your club, customise every detail,
+                and let AI bring your design to life.
+            </p>
+
+            <a href="#" class="start-button">
+                ⚡ START DESIGNING
+            </a>
+
+            <span class="no-account">
+                No account required
+            </span>
+
+        </div>
+
+
+        <!-- KIT PREVIEW -->
+
+        <div class="kit-area">
+
+            <div class="kit">
+
+                <div class="kit-collar"></div>
+
+                <div class="kit-logo">
+                    YOUR CLUB
+                </div>
+
+                <div class="kit-stripe"></div>
+
+                <div class="kit-sponsor">
+                    YOUR SPONSOR
+                </div>
+
+                <div class="kit-number">
+                    10
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            HOW IT WORKS
+        </h2>
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    PICK YOUR CLUB
+                </h3>
+
+                <p>
+                    Search for your favourite football club
+                    and choose the team you want to design for.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    DESIGN YOUR KIT
+                </h3>
+
+                <p>
+                    Choose colours, patterns, collars,
+                    sponsors and all the little details.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    BRING IT TO LIFE
+                </h3>
+
+                <p>
+                    Hit generate and let AI turn your
+                    idea into a football kit concept.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+            © 2026 Footy Kit Lab
+        </div>
+
+        <div>
+            Made for football fans ⚽
+        </div>
+
+    </footer>
+
+</body>
+</html>
