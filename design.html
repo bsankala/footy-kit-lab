@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Club | Footy Kit Lab</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #080808;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #222;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #e50914;
+        }
+
+        .back {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back:hover {
+            color: white;
+        }
+
+        /* MAIN */
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 25px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #181818;
+            border: 1px solid #333;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 75px);
+            letter-spacing: -4px;
+            line-height: 0.95;
+            margin-bottom: 18px;
+        }
+
+        .intro p {
+            color: #888;
+            font-size: 17px;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            position: relative;
+            margin: 0 auto 35px;
+            max-width: 700px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #777;
+        }
+
+        #clubSearch {
+            width: 100%;
+            padding: 20px 25px 20px 55px;
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 14px;
+            color: white;
+            font-size: 17px;
+            outline: none;
+        }
+
+        #clubSearch:focus {
+            border-color: #e50914;
+        }
+
+        #clubSearch::placeholder {
+            color: #666;
+        }
+
+        /* CLUB GRID */
+
+        #clubGrid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .club-card {
+            background: #141414;
+            border: 1px solid #252525;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .club-card:hover {
+            transform: translateY(-5px);
+            border-color: #e50914;
+            background: #191919;
+        }
+
+        .badge {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .club-card h3 {
+            font-size: 15px;
+        }
+
+        .club-card p {
+            color: #666;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+            #clubGrid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 450px) {
+            #clubGrid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .club-card {
+                padding: 20px 10px;
+            }
+
+            .badge {
+                width: 55px;
+                height: 55px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            FOOTY<span>KIT</span>LAB
+        </a>
+
+        <a href="index.html" class="back">
+            ← Back home
+        </a>
+    </nav>
+
+
+    <main>
+
+        <div class="intro">
+
+            <div class="tag">
+                STEP 01
+            </div>
+
+            <h1>
+                PICK YOUR<br>CLUB.
+            </h1>
+
+            <p>
+                Who are you designing for?
+            </p>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                type="text"
+                id="clubSearch"
+                placeholder="Search for a club..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div id="clubGrid"></div>
+
+    </main>
+
+
+    <script>
+
+        const clubs = [
+            "Fulham",
+            "Manchester City",
+            "Manchester United",
+            "Liverpool",
+            "Arsenal",
+            "Tottenham",
+            "Brentford",
+            "Everton",
+            "Aston Villa",
+            "Chelsea",
+            "Crystal Palace",
+            "Bournemouth",
+            "Ipswich",
+            "Coventry",
+            "Hull",
+            "Sunderland",
+            "Newcastle",
+            "Brighton",
+            "Leeds",
+            "Real Madrid",
+            "Barcelona",
+            "Atletico Madrid",
+            "Athletic Club Bilbao",
+            "Villarreal",
+            "Real Betis",
+            "Real Sociedad",
+            "Elche",
+            "Napoli",
+            "AC Milan",
+            "AS Roma",
+            "Juventus",
+            "Fiorentina",
+            "Como",
+            "Bayern Munich",
+            "Borussia Dortmund",
+            "Bayer Leverkusen",
+            "RB Leipzig",
+            "Sporting",
+            "Benfica",
+            "Porto",
+            "LA Galaxy",
+            "Inter Miami",
+            "Vancouver Whitecaps",
+            "Al Nassr",
+            "Al Hilal",
+            "Al Ittihad"
+        ];
+
+        const searchInput = document.getElementById("clubSearch");
+        const clubGrid = document.getElementById("clubGrid");
+
+
+        function showClubs(list) {
+
+            clubGrid.innerHTML = "";
+
+            if (list.length === 0) {
+
+                clubGrid.innerHTML = `
+                    <div class="no-results">
+                        <h3>No clubs found 😭</h3>
+                        <p>Try searching for another club.</p>
+                    </div>
+                `;
+
+                return;
+            }
+
+            list.forEach(club => {
+
+                const card = document.createElement("div");
+
+                card.className = "club-card";
+
+                card.innerHTML = `
+                    <div class="badge">⚽</div>
+                    <h3>${club}</h3>
+                    <p>DESIGN KIT</p>
+                `;
+
+                card.addEventListener("click", () => {
+
+                    localStorage.setItem("selectedClub", club);
+
+                    window.location.href = "customise.html";
+
+                });
+
+                clubGrid.appendChild(card);
+
+            });
+
+        }
+
+
+        searchInput.addEventListener("input", () => {
+
+            const searchTerm = searchInput.value
+                .toLowerCase()
+                .trim();
+
+            const filteredClubs = clubs.filter(club =>
+                club.toLowerCase().includes(searchTerm)
+            );
+
+            showClubs(filteredClubs);
+
+        });
+
+
+        // Show all clubs when the page opens
+        showClubs(clubs);
+
+    </script>
+
+</body>
+</html>
